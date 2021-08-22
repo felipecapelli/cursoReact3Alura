@@ -1,0 +1,8 @@
+Como o materialize eh um fremework e pode ser utilizado com react, mas não é um fremework feito para o react;
+Com isso, utilizaremos, o material-UI. (a partir daí poderemos importar components e não somente classes.
+Para importar, usar o comando abaixo:
+
+npm install @material-ui/core
+
+------
+
