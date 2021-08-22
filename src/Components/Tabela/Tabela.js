@@ -7,47 +7,90 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button'
 
-class Tabela extends Component {
-    
-    render() {
+const CellDeleta = ({ removeDados, id, titulo}) => {
+    if (!removeDados) {
+        return null
+    }
+    if (titulo) {
+        return <TableCell>Remover</TableCell>
+    }
+    return(
+        <TableCell>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick = { () => { 
+                    removeDados(id)
+                }}
+            >
+                Remover
+            </Button>
+        </TableCell>
+    )
+        
+};
 
-        const { autores, removeAutor } = this.props;
+/* //jeito que eu fiz e que também da certo
+const CellDeleta = ({ removeDados, id }) =>
+    (
+        removeDados ?
+        <TableCell>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick = { () => { 
+                    removeDados(id)
+                }}
+            >
+                Remover
+            </Button>
+        </TableCell>
+        :
+        ''
+    )
+*/
 
-        return (
-            <Table className="centered highlight">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Autores</TableCell>
-                        <TableCell>Livros</TableCell>
-                        <TableCell>Preços</TableCell>
-                        <TableCell>Remover</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableHead />
-                <TableBody>
+const Tabela = props => {
+
+    //uma das maneiras de exibir o título da coluna no tablehead
+    const TituloDeleta = ({ removeDados }) => (
+        removeDados ?
+        <TableCell>Deleta</TableCell>
+        :
+        ''
+    );
+
+    const { campos, dados, removeDados } = props;
+
+    return (
+        <Table className="centered highlight">
+            <TableHead>
+                <TableRow>
                     {
-                        autores.map(autor => (
-                            <TableRow key={autor.id}>
-                                <TableCell>{autor.nome}</TableCell>
-                                <TableCell>{autor.livro}</TableCell>
-                                <TableCell>{autor.preco}</TableCell>
-                                <TableCell><Button  
-                                                variant="contained"
-                                                color="primary"
-                                                onClick = { () => { 
-                                                    removeAutor(autor.id) 
-                                                }}
-                                            >
-                                                Remover
-                                            </Button>
-                                </TableCell>
-                            </TableRow>
+                        campos.map((campo) => (
+                            <TableCell>{campo.titulo}</TableCell>
                         ))
                     }
-                </TableBody>
-            </Table>
-        );
-    }
+                    <CellDeleta removeDados titulo></CellDeleta>
+                </TableRow>
+            </TableHead>
+            <TableHead />
+            <TableBody>
+                {
+                    dados.map(dado => (
+                        <TableRow key={dado.id}>
+                            {
+                                campos.map(campo => (
+                                    <TableCell>{dado[campo.dado]}</TableCell>
+                                ))
+                            }
+                            <CellDeleta id={dado.id} removeDados={removeDados}></CellDeleta>
+                        </TableRow>
+                    ))
+                }
+            </TableBody>
+        </Table>
+    );
 }
 
 export default Tabela;
