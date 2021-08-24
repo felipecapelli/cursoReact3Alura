@@ -7,12 +7,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button'
 
-const CellDeleta = ({ removeDados, id, titulo}) => {
+const CellDeleta = ({ removeDados, id }) => {
     if (!removeDados) {
         return null
-    }
-    if (titulo) {
-        return <TableCell>Remover</TableCell>
     }
     return(
         <TableCell>
@@ -30,29 +27,17 @@ const CellDeleta = ({ removeDados, id, titulo}) => {
         
 };
 
-/* //jeito que eu fiz e que também da certo
-const CellDeleta = ({ removeDados, id }) =>
-    (
-        removeDados ?
-        <TableCell>
-            <Button
-                variant="contained"
-                color="primary"
-                onClick = { () => { 
-                    removeDados(id)
-                }}
-            >
-                Remover
-            </Button>
-        </TableCell>
-        :
-        ''
-    )
-*/
+const TituloDeleta = ({ removeDados }) => {
+    if (!removeDados) {
+        return null;
+    }
+
+    return <TableCell>Remover</TableCell>
+}
 
 const Tabela = props => {
 
-    //uma das maneiras de exibir o título da coluna no tablehead
+    //uma das maneiras de exibir o título da coluna no tablehead - mas não está sendo usada esse projeto, apenas para exemplificar
     const TituloDeleta = ({ removeDados }) => (
         removeDados ?
         <TableCell>Deleta</TableCell>
@@ -71,10 +56,9 @@ const Tabela = props => {
                             <TableCell>{campo.titulo}</TableCell>
                         ))
                     }
-                    <CellDeleta removeDados titulo></CellDeleta>
+                    <TituloDeleta removeDados = { removeDados } ></TituloDeleta>
                 </TableRow>
             </TableHead>
-            <TableHead />
             <TableBody>
                 {
                     dados.map(dado => (
