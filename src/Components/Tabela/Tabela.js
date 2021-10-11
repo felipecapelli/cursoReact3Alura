@@ -38,12 +38,12 @@ const TituloDeleta = ({ removeDados }) => {
 const Tabela = props => {
 
     //uma das maneiras de exibir o título da coluna no tablehead - mas não está sendo usada esse projeto, apenas para exemplificar
-    const TituloDeleta = ({ removeDados }) => (
+    /*const TituloDeleta = ({ removeDados }) => (
         removeDados ?
         <TableCell>Deleta</TableCell>
         :
         ''
-    );
+    );*/
 
     const { campos, dados, removeDados } = props;
 

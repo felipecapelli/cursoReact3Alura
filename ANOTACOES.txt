@@ -6,3 +6,7 @@ npm install @material-ui/core
 
 ------
 
+Para utilizar o Alert, é necessário importar mais componentes:
+
+npm install @material-ui/lab
+

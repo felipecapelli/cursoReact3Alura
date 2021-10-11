@@ -14,7 +14,7 @@ class FormValidator {
 
                 if(!validacao[regra.campo].isInvalid){
                     const campoValor = state[regra.campo.toString()];
-                    const args = regra.agrs || [];
+                    const args = regra.args || [];
                     const metodoValidacao = typeof regra.metodo === 'string' ?
                         validador[regra.metodo] : regra.metodo;
 
